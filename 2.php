@@ -51,7 +51,7 @@ function isValidInterval($interval) {
 	return preg_match($patternTime, $interval);
 }
 
-function checkIntesect($interval) {
+function checkIntersect($interval) {
 	global $list;
 	$times1 = explode("-", $interval);
     foreach ($list as $item) {
