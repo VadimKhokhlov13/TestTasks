@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Olympics</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="m-4">Олимпиада</h1>
+        <label for="input">Участники</label>
+        <div class="input-group mb-3">
+            <input id="input" type="text" class="form-control" placeholder="введите имена участников через запятую">
+            <div class="input-group-append">
+              <button id="button" class="btn btn-outline-secondary" type="button">Добавить</button>
+            </div>
+        </div>
+        <div id="tableContainer" class="d-none">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><a id="id" href="#">id</a></th>
+                        <th><a id="name" href="#">имя</a></th>
+                        <th><a id="points" href="#">очки</a></th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
