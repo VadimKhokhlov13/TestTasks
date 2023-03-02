@@ -14,11 +14,11 @@ document.getElementById('input').addEventListener('keypress', function(e) {
     }, 0);
 })
 
-document.getElementById('button').addEventListener('click', function() {
+document.getElementById('button').addEventListener('click', async function() {
     let inputVal = document.getElementById('input').value;
     let newParticipants = inputVal.split(',').filter(part => part);
     document.getElementById('input').value = "";
-    addParticipants(newParticipants);
+    await addParticipants(newParticipants);
     createTable();
 })
 
@@ -34,11 +34,18 @@ ids.forEach(el => {
     })
 })
 
-function addParticipants(newParticipants) {
+async function addParticipants(newParticipants) {
+    const url = '/getPoints.php';
+    let count = newParticipants.length;
+    let response = await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({count})
+    });
+    let points = await response.json();
     let id = participants.length + 1;
-    newParticipants.forEach(name => {
-        let points = Math.round(Math.random() * 100);
-        participants.push({id, name, points})
+    newParticipants.forEach((name, i) => {
+        participants.push({id, name, points: points[i]});
         id++;
     });
 }
