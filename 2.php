@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * @charset UTF-8
@@ -53,14 +53,24 @@ function isValidInterval($interval) {
 
 function checkIntersect($interval) {
 	global $list;
-	$times1 = explode("-", $interval);
+    $countOfMinutes = 1440;
+	$t1 = explode("-", $interval);
+    $offset = getMinutes($t1[0]);
+    $finish = (getMinutes($t1[1]) + $countOfMinutes - $offset) % $countOfMinutes;
     foreach ($list as $item) {
-    	$times2 = explode("-", $item);
-    	if (!($times1[0] >= $times2[1] || $times1[1] <= $times2[0])) {
-         	return "произошло наложение";
-      	}
+    	$t2 = explode("-", $item);
+    	$startInterval = (getMinutes($t2[0]) + $countOfMinutes - $offset) % $countOfMinutes;
+        $finishInterval = (getMinutes($t2[1]) + $countOfMinutes - $offset - 1) % $countOfMinutes;
+        if ($startInterval > $finishInterval || $startInterval < $finish) {
+        	return "есть наложение";
+        }
     }
     return "наложения нет";
+}
+
+function getMinutes($time) {
+	[$h, $m] = explode(":", $time);
+	return 60 * $h + $m;
 }
 
 ?>
